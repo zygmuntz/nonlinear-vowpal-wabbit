@@ -1,0 +1,62 @@
+vw -d data/train.vw -k -c -f data/model --passes 300 --nn 15
+
+# or
+
+vw -d data/train.vw -k -c -f data/model --passes 300 --nn 15 -q nn
+
+vw -t -d data/validation.vw -k -c -i data/model -p data/p_val.txt
+vw -t -d data/test.vw -k -c -i data/model -p data/p_test.txt
+
+python rmse.py data/validation.vw data/p_val.txt
+python rmse.py data/test.vw data/p_test.txt
+
+
+with -q nn
+
+150 / 15
+RMSE: 0.0798091882346		(validation)
+RMSE: 0.0779915544006		(test)
+
+150 / 10
+RMSE: 0.0847857611829
+RMSE: 0.0831426206164
+
+150 / 20
+RMSE: 0.0813876999164
+RMSE: 0.0773874325714
+
+300 / 15
+RMSE: 0.077945985172
+RMSE: 0.0751992496762
+
+300 / 20
+RMSE: 0.078826360582
+RMSE: 0.0751889661874
+
+
+without -q nn
+
+150 / 15
+RMSE: 0.101876722762
+RMSE: 0.0959829625782
+
+150 / 20 (slight overfit?)
+RMSE: 0.100910455173
+RMSE: 0.0992533867071
+
+200 / 15
+RMSE: 0.0996699257889
+RMSE: 0.0936539736953
+
+	300 / 15
+	RMSE: 0.0942322210389
+	RMSE: 0.0895329037507
+
+300 / 20
+RMSE: 0.0975440630969
+RMSE: 0.0956634922023
+
+400 / 20
+RMSE: 0.0952208898442
+RMSE: 0.0942481600302
+
